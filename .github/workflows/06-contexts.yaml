@@ -1,6 +1,8 @@
 name: 06 - Contexts
 
-on: push
+on:
+  push:
+  workflow_dispatch:
 
 jobs:
   echo-data:
@@ -13,7 +15,7 @@ jobs:
           echo "SHA: ${{ github.sha }}"
           echo "Actor: ${{ github.actor }}"
           echo "Workflow: ${{ github.workflow }}"
-          echo "Run ID: ${{ github.run_id }}
+          echo "Run ID: ${{ github.run_id }}"
           echo "Run Number: ${{ github.run_number }}"
       - name: Retrieve Variable
         run: |
