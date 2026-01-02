@@ -47,7 +47,7 @@ jobs:
           echo "Environment var: ${{ vars.TARGET_VAR }}"
   echo-undefined:
     runs-on: Print Undefined Variables
-      steps:
-        - name : Print Undefined Variables
-          run: |
-            echo "Org var: ${{ env.UNDEFINED_VAR_WITH_DEFAULT }}"
+    steps:
+      - name : Print Undefined Variables
+        run: |
+          echo "Org var: ${{ env.UNDEFINED_VAR_WITH_DEFAULT }}"
