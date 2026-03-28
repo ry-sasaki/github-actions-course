@@ -1,7 +1,22 @@
 name: 17 - 2 Custom Actions - JS
-run-name: 17 - 2 Custom Actions - JS
+run-name: 17 - 2 Custom Actions - JS - ${{ inputs.base-branch}} - ${{ inputs.target-branch }} - ${{ inputs.working-dir }}
 on:
   workflow_dispatch:
+    inputs:
+      base-branch:
+        description: The branch used as the base for the dependency update checks
+        required: false
+        default: main
+      target-branch:
+        description: The branch from which the PR is created
+        required: false
+        default: update-dependencies
+      working-dir:
+        description: The working directory of the project to check for dependency updates
+        required: true
+      debug:
+        description: Whether the output debug messages to the console
+        required: false
 jobs:
   dependency-update:
     runs-on: ubuntu-latest
@@ -9,3 +24,9 @@ jobs:
       - uses: actions/checkout@v4
       - name: Check for dependency updates
         uses: ./.github/actions/js-dependency-update
+        with:
+          base-branch: ${{ github.event.inputs.base-branch }}
+          target-branch: ${{ github.event.inputs.target-branch }}
+          working-directory: ${{ github.event.inputs.working-dir }}
+          gh-token: ${{ secrets.GITHUB_TOKEN }}
+          debug: ${{ github.event.inputs.debug }}
